@@ -1,4 +1,4 @@
-package com.jayden.spring.scaffold.domain.member.dto;
+package com.jayden.spring.scaffold.domain.user.dto;
 
 import lombok.Getter;
 

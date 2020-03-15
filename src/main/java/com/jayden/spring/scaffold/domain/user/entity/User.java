@@ -1,4 +1,4 @@
-package com.jayden.spring.scaffold.domain.member.entity;
+package com.jayden.spring.scaffold.domain.user.entity;
 
 import com.jayden.spring.scaffold.domain.common.model.BaseTimeEntity;
 import com.jayden.spring.scaffold.domain.common.model.Email;
@@ -7,9 +7,9 @@ import lombok.Getter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "members")
+@Table(name = "user")
 @Getter
-public class Member extends BaseTimeEntity {
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
