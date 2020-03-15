@@ -15,15 +15,19 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Email {
+public class EmailAddress {
 
     @Column(name = "email")
-    private String address;
+    private String value;
 
-    public Email(String address) {
-        checkArgument(isNotEmpty(address), "address must be provided");
-        checkArgument(checkAddress(address), "Invalid email address: " + address);
-        this.address = address;
+    public EmailAddress(String value) {
+        checkArgument(isNotEmpty(value), "address must be provided");
+        checkArgument(checkAddress(value), "Invalid email address: " + value);
+        this.value = value;
+    }
+
+    public static EmailAddress of(String value) {
+        return new EmailAddress(value);
     }
 
     /**
@@ -42,7 +46,7 @@ public class Email {
      * @return String
      */
     public String getName() {
-        String[] tokens = address.split("@");
+        String[] tokens = value.split("@");
         if (tokens.length == 2) {
             return tokens[0];
         }
@@ -56,7 +60,7 @@ public class Email {
      * @return String
      */
     public String getDomain() {
-        String[] tokens = address.split("@");
+        String[] tokens = value.split("@");
         if (tokens.length == 2) {
             return tokens[1];
         }
@@ -69,27 +73,27 @@ public class Email {
      *
      * @return String
      */
-    public String getAddress() {
-        return address;
+    public String getValue() {
+        return value;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Email email = (Email) o;
-        return Objects.equals(address, email.address);
+        EmailAddress emailAddress = (EmailAddress) o;
+        return Objects.equals(value, emailAddress.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(address);
+        return Objects.hash(value);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("address", address)
-                .toString();
+            .append("address", value)
+            .toString();
     }
 }
